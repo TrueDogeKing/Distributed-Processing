@@ -10,21 +10,48 @@
 #define COLOR_COUNT 6
 #define MAX_ATTEMPTS 12
 
-bool running=false;
-// Function to display available commands
+pid_t pid;
 void handle_signal(int){
-    if(running) return;
-    else exit(0);
+    kill(pid, SIGKILL);
+    exit(0);
     
 }
 
+
+
+void generateBoard(int* correctBoard){
+    for(int i=0;i<CODE_LENGTH;i++){
+        correctBoard[i]=rand()%COLOR_COUNT; 
+    }
+}
+
+void feedbackCoder(int* guesscolors,char* feedback,int* correctBoard) {
+    int correctPlaces=0, correctColors=0;
+    for(int i=0;i<CODE_LENGTH;i++){
+        if(guesscolors[i]==correctBoard[i])
+            correctPlaces++;
+        else{
+            for(int j=0;j<CODE_LENGTH;j++){
+                if(i==j)
+                    continue;
+                if(guesscolors[i]==correctBoard[j]){
+                    correctColors++;
+                    break;
+                    }
+            }
+        }
+
+    }
+    feedback[0]=correctPlaces;
+    feedback[1]=correctColors;
+}
+
 int main() {
-    signal(SIGINT, handle_signal);
-    int parent_to_child[2];  // Pipe from parent to child (for the secret code)
-    int child_to_parent[2];  // Pipe from child to parent (for guesses and feedback)
+    int coder_to_decoder[2];  // Pipe from coder to decoder (for the secret code)
+    int decoder_to_coder[2];  // Pipe from decoder to code (for guesses and feedback)
 
     // Create pipes
-    if (pipe(parent_to_child) == -1 || pipe(child_to_parent) == -1) {
+    if (pipe(coder_to_decoder) == -1 || pipe(decoder_to_coder) == -1) {
         perror("Pipe creation failed");
         exit(1);
     }
@@ -33,50 +60,56 @@ int main() {
     GameState *state = new_game_state();
 
     // Fork the process
-    pid_t pid = fork();
-    running=true;
+    pid = fork();
     if (pid == -1) {
         perror("Fork failed");
         exit(1);
     }
 
-    if (pid == 0) {  // Child process
+    if (pid == 0) {  // Decoder process
         // Close unused pipes
-        close(parent_to_child[1]);
-        close(child_to_parent[0]);
+        close(coder_to_decoder[1]);
+        close(decoder_to_coder[0]);
 
         int guessCode[CODE_LENGTH] = {0};  // Declare guess properly
         char feedback[2];  // Fixed-size array for feedback: 2 integers (correct colors, correct positions)
 
-        // Child generates guesses and sends them to the parent
+        // Decoder generates guesses and sends them to the parent
         for (int i = 0; i < MAX_ATTEMPTS; ++i) {
-
-            guess(state, guessCode);  // Generate a guess using the guess function
+            guess(state, guessCode,feedback);  // Generate a guess using the guess function
 
             // Send the guess to the parent process
-            write(child_to_parent[1], guessCode, sizeof(guessCode));
+            write(decoder_to_coder[1], guessCode, sizeof(guessCode));
 
 
             // Wait for feedback from the parent process
-            read(parent_to_child[0], feedback, sizeof(feedback));
+            read(coder_to_decoder[0], feedback, sizeof(feedback));
 
-            printf("child read feedback: %d correct place(s), %d in correct colors(s)\n", feedback[0], feedback[1]);
+           printf("Decoder read feedback number:%d correct place(s), %d in correct colors(s)\n",feedback[0], feedback[1]);
 
             // If feedback indicates the guess is correct, exit the loop
             if (feedback[0] == CODE_LENGTH) {
+                printf("Success secret code guessed\n");
                 break;
             }
         }
 
         // Close pipes before exiting
-        close(parent_to_child[0]);
-        close(child_to_parent[1]);
-        running=false;
+        close(coder_to_decoder[0]);
+        close(decoder_to_coder[1]);
         exit(0);
-    } else {  // Parent process
+    } else {  // Coder process
+        int correctBoard[CODE_LENGTH];
+        for(int i=0;i<7;i++)
+            generateBoard(correctBoard);
+        printf("correct board ");
+        for(int i=0;i<CODE_LENGTH;i++){
+            printf("%d ", correctBoard[i]);
+        }
+        printf("\nstart game\n");
         // Close unused pipes
-        close(parent_to_child[0]);
-        close(child_to_parent[1]);
+        close(coder_to_decoder[0]);
+        close(decoder_to_coder[1]);
 
         int guessCode[CODE_LENGTH] = {0};
         char feedback[2];  // Fixed-size array for feedback: 2 integers (correct colors, correct positions)
@@ -85,36 +118,37 @@ int main() {
         for (int i = 0; i < MAX_ATTEMPTS; ++i) {
 
             // Receive guess from the child
-            read(child_to_parent[0], guessCode, sizeof(guessCode));
-            printf("parent read guess: ");
+            read(decoder_to_coder[0], guessCode, sizeof(guessCode));
+            printf("Coder read guess number: ");
             for (int j = 0; j < CODE_LENGTH; j++) {
                 printf("%d ", guessCode[j]);
             }
             printf("\n");
 
-            // Provide feedback to the guess
-            on_feedback(state, guessCode,feedback);
+            feedbackCoder(guessCode,feedback,correctBoard);
+            
             
 
+            // Send feedback to the Dekoder
+            write(coder_to_decoder[1], feedback, sizeof(feedback));
+            
             // If the guess is correct, break the loop
             if (feedback[0] == CODE_LENGTH) {
-                printf("Dekoder guessed the combination in %d attempts!\n", getAttempts(state));
+                printf("Dekoder guessed the combination!\n");
                 break;
             }
-
-            // Send feedback to the child
-            write(parent_to_child[1], feedback, sizeof(feedback));
         }
 
         // Wait for the child process to finish
+        printf("waiting for child");
         wait(NULL);
 
         // Free the allocated memory
         destroy_game_state(state);
 
         // Close pipes before exiting
-        close(parent_to_child[1]);
-        close(child_to_parent[0]);
+        close(coder_to_decoder[1]);
+        close(decoder_to_coder[0]);
     }
 
     return 0;

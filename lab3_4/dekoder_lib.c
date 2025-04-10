@@ -10,7 +10,9 @@
 
 typedef struct GameState {
     int attempt;
-    int correctBoard[CODE_LENGTH];
+    char feedbackHistory[MAX_ATTEMPTS+1][2];
+    int boardHistory[MAX_ATTEMPTS+1][CODE_LENGTH];
+    
 } GameState;
 
 
@@ -18,12 +20,6 @@ GameState *new_game_state() {
     srand(time(NULL));
     GameState *state = malloc(sizeof(GameState));
     state->attempt = 0;
-    printf("correct board ");
-    for(int i=0;i<CODE_LENGTH;i++){
-        state->correctBoard[i]=rand()%COLOR_COUNT; 
-        printf("%d ", state->correctBoard[i]);
-    }
-    printf("\n");
 
     return state;
 }
@@ -36,32 +32,60 @@ void destroy_game_state(GameState *state) {
 }
 
 
-void guess(GameState *state, int *guess) {
-    for(int i=0;i<CODE_LENGTH;i++){
-        guess[i]=rand()%COLOR_COUNT; 
-    }
-}
+void guess(GameState *state, int *guess,char* feedback) {
+    int correctPlaces = 0;//*
+    int isGuessPlausible = 0;
+    if(state->attempt!=0)
+        for(int i=0;i<2;i++)
+            state->feedbackHistory[state->attempt-1][i]=feedback[i];
+        
 
-void on_feedback(GameState *state,int* guesscolors,char* feedback) {
-    int correctPlaces=0, correctColors=0;
-    for(int i=0;i<CODE_LENGTH;i++){
-        if(guesscolors[i]==state->correctBoard[i])
-            correctPlaces++;
-        else{
-            for(int j=0;j<CODE_LENGTH;j++){
-                if(i==j)
-                    continue;
-                if(guesscolors[i]==state->correctBoard[j]){
-                    correctColors++;
-                    break;
-                    }
+
+    /*
+    int localguess[CODE_LENGTH];
+    while (isGuessPlausible == 0) // loop until guess is plausible
+    {
+        for (int i = 0; i < CODE_LENGTH; i++) {
+            localguess[i] = rand() % COLOR_COUNT;
+        }
+        if (state->attempt == 0) {
+            isGuessPlausible = 1;
+            break;
+        }
+        for (int k = 0; k < state->attempt; k++) // go throught every history state
+        {
+            for (int j = 0; j < CODE_LENGTH; j++) // count correct spaces with history state
+            {
+                if (localguess[j] == state->boardHistory[state->attempt][j])
+                {
+                    correctPlaces++;
+                }
+            }
+            if (correctPlaces != state->feedbackHistory[state->attempt][0]) // compare correct spaces with feedback history
+            {
+                break;
+            }
+            correctPlaces = 0; // reset correctPlaces
+            if (k == state->attempt)
+            {
+                isGuessPlausible = 1;
             }
         }
-
     }
-    feedback[0]=correctPlaces;
-    feedback[1]=correctColors;
+    for(int i=0;i<CODE_LENGTH;i++){
+        guess[i]=localguess[i];
+    }
+        */
+
+        for (int i = 0; i < CODE_LENGTH; i++) {
+            guess[i] = rand() % COLOR_COUNT;
+        }
+
+    for(int i=0;i<CODE_LENGTH;i++){
+        state->boardHistory[state->attempt][i]=guess[i];
+    }
     state->attempt++;
+
 }
 
 int getAttempts(GameState *state){
