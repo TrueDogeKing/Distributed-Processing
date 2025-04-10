@@ -5,10 +5,9 @@ typedef struct GameState GameState;
 
 
 GameState* new_game_state();
-void guess(GameState *state,char* guesscolors);
-void on_feedback(GameState *state);
+void guess(GameState *state,int* guesscolors);
+void on_feedback(GameState *state,int* guesscolors,char* feedback);
 void destroy_game_state(GameState *state);
 int getAttempts(GameState *state);
-char* getGuessedStatus(GameState *state);
 
 #endif

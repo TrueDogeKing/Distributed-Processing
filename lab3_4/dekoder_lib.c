@@ -10,9 +10,7 @@
 
 typedef struct GameState {
     int attempt;
-    int guesses[MAX_ATTEMPTS][CODE_LENGTH];
     int correctBoard[CODE_LENGTH];
-    char guessedStatus[2];
 } GameState;
 
 
@@ -38,43 +36,34 @@ void destroy_game_state(GameState *state) {
 }
 
 
-void guess(GameState *state, char *guesscolors) {
+void guess(GameState *state, int *guess) {
     for(int i=0;i<CODE_LENGTH;i++){
-        state->guesses[state->attempt][i]=rand()%COLOR_COUNT; 
+        guess[i]=rand()%COLOR_COUNT; 
     }
-    //debug
-    printf("new guess %d: Guessing ", state->attempt);
-    for (int i = 0; i < CODE_LENGTH; ++i)
-        printf("%d ", state->guesses[state->attempt][i]);
-    printf("\n");
 }
 
-void on_feedback(GameState *state) {
+void on_feedback(GameState *state,int* guesscolors,char* feedback) {
     int correctPlaces=0, correctColors=0;
     for(int i=0;i<CODE_LENGTH;i++){
-        if(state->guesses[state->attempt][i]==state->correctBoard[i])
+        if(guesscolors[i]==state->correctBoard[i])
             correctPlaces++;
         else{
             for(int j=0;j<CODE_LENGTH;j++){
                 if(i==j)
                     continue;
-                if(state->guesses[state->attempt][i]==state->correctBoard[j])
+                if(guesscolors[i]==state->correctBoard[j]){
                     correctColors++;
+                    break;
+                    }
             }
         }
 
     }
-    printf("Feedback: %d correct color(s), %d in correct place(s)\n", correctColors, correctPlaces);
-    state->guessedStatus[0]=correctPlaces;
-    state->guessedStatus[1]=correctColors;
+    feedback[0]=correctPlaces;
+    feedback[1]=correctColors;
     state->attempt++;
-    // Można dodać eliminację kombinacji, które nie pasują – zaawansowana wersja.
-    // Obecna wersja to brute-force, więc ignoruje feedback.
 }
 
 int getAttempts(GameState *state){
     return state->attempt;
-}
-char* getGuessedStatus(GameState *state){
-    return state->guessedStatus;
 }
