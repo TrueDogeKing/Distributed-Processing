@@ -140,7 +140,7 @@ int main() {
         }
 
         // Wait for the child process to finish
-        printf("waiting for child");
+        printf("waiting for child\n");
         wait(NULL);
 
         // Free the allocated memory
