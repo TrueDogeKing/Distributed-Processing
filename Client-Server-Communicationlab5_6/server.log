@@ -1,0 +1,132 @@
+[16:06:03.484284400] Server started on port 12345
+[16:06:10.929144600] Doge connected!
+[16:06:13.103226700] Doge use commend /help
+[16:06:20.623623600] Doge send private message to Doge
+[16:06:20.624619500] Doge get private message frome Doge
+[16:06:36.127778600] Doge send private message to Hola
+[16:06:36.128776900] Server not found user: Hola. Message send by Doge was not recived!
+[16:07:13.372922600] Doge send message: eter słucha?
+[16:15:52.390865700] Server started on port 12345
+[16:16:34.837749400] Server started on port 12345
+[16:16:43.146177500] Error validating login.
+[16:16:50.681360] Error checking if user exists.
+[16:16:50.683378800] Doge registered and joined.
+[16:16:50.684352] Doge connected!
+[16:16:57.859378] Doge use commend /help
+[16:17:20.728453] Hola registered and joined.
+[16:17:20.728453] Hola connected!
+[16:17:24.994530300] Hola use commend /help
+[16:17:36.525955300] Hola send private message to Doge
+[16:17:36.525955300] Server not found user: Doge. Message send by Hola was not recived!
+[16:19:37.675627900] Server started on port 12345
+[16:19:44.676510] Doge logged in.
+[16:19:44.677509200] Doge connected!
+[16:27:29.109785200] Server started on port 12345
+[16:27:38.539404600] Hola logged in.
+[16:27:38.539404600] Hola connected!
+[16:27:44.499655600] Hola use commend /help
+[16:27:54.565047700] Hola sent private message to Doge
+[16:27:54.566045] Stored offline message for Doge from Hola
+[16:28:06.512412200] Doge logged in.
+[16:28:06.512412200] Delivered offline messages to Doge
+[16:28:06.512412200] Doge connected!
+[16:30:13.811673300] Server started on port 12345
+[16:30:22.008577800] Hola logged in.
+[16:30:22.009576800] Hola connected!
+[16:30:26.574770600] Hola use commend /help
+[16:30:35.821715500] Hola send message: hello everyone
+[16:31:46.448202600] Hola sent private message to Doge
+[16:31:46.448202600] Stored offline message for Doge from Hola
+[16:32:05.542596500] Doge logged in.
+[16:32:05.542596500] Delivered offline messages to Doge
+[16:32:05.542596500] Doge connected!
+[16:39:43.862126200] Server started on port 12345
+[16:40:04.056234] Doge logged in.
+[16:40:04.056234] Doge connected!
+[16:47:05.639794] Server started on port 12345
+[16:47:12.881693200] Error validating login.
+[16:47:18.901343500] Error checking if user exists.
+[16:47:18.909322500] Doge registered and joined.
+[16:47:18.909322500] Doge connected!
+[16:47:37.298473400] Doge send message: hola
+[16:47:41.968689400] Doge sent private message to hola
+[16:47:41.972678700] Stored offline message for hola from Doge
+[16:47:56.952759500] Server started on port 12345
+[16:47:58.939757200] Server started on port 12345
+[16:48:06.263291] Doge logged in.
+[16:48:06.264288300] Doge connected!
+[16:48:25.927676500] Hola registered and joined.
+[16:48:25.927676500] Hola connected!
+[16:50:18.939294400] Server started on port 12345
+[16:50:26.457197100] Doge logged in.
+[16:50:26.458194400] Doge connected!
+[16:50:32.716873100] Doge sent private message to Hola
+[16:50:32.719898500] Stored offline message for Hola from Doge
+[16:50:48.908813700] Doge sent private message to tung_tung
+[16:52:10.413794100] Server started on port 12345
+[16:52:16.628995100] Doge logged in.
+[16:52:16.628995100] Doge connected!
+[16:52:25.524462800] Doge sent private message to tungtung
+[16:52:34.128926800] Doge sent private message to Hola
+[16:52:34.129926900] Stored offline message for Hola from Doge
+[16:52:41.691245100] Doge sent private message to Hola
+[16:52:41.692242600] Stored offline message for Hola from Doge
+[16:52:47.322024200] Doge use commend /quit
+[16:52:47.323021600] Doge left the server!
+[16:52:56.251980200] Hola logged in.
+[16:52:56.251980200] Delivered offline messages to Hola
+[16:52:56.252978700] Hola connected!
+[16:53:08.147343600] Hola use commend /quit
+[16:53:08.147343600] Hola left the server!
+[17:43:49.561737500] Server started on port 12345
+[17:43:58.262879500] Server shutdown initiated by admin.
+[17:43:58.264830400] Shutting down connection for: null
+[17:43:58.264830400] Shutting down connection for: null
+[17:46:10.772693700] Server started on port 12345
+[17:46:29.168916600] Doge logged in.
+[17:46:29.168916600] Doge connected!
+[17:47:07.241936600] Doge use commend /quit
+[17:47:07.242912500] Doge left the server!
+[17:49:04.968476600] Server started on port 12345
+[17:49:21.248280600] Hola logged in.
+[17:49:21.248280600] Hola connected!
+[17:49:24.658727900] Hola use commend /help
+[17:49:31.029096800] Hola use commend /nick
+[17:49:31.036545500] Hola changed their nickname to Dos
+[17:49:46.408446900] Dos sent private message to Doge
+[17:49:46.419181] Stored offline message for Doge from Dos
+[17:49:49.732736800] Dos use commend /quit
+[17:49:49.732736800] Dos left the server!
+[17:49:57.908781900] Dos logged in.
+[17:49:57.909758700] Dos connected!
+[17:50:03.637161400] Dos use commend /quit
+[17:50:03.638138700] Dos left the server!
+[14:48:02.436736200] Server started on port 12345
+[14:48:10.437937200] Server shutdown initiated via console
+[14:48:20.335429500] Server started on port 12345
+[14:48:28.259776400] Doge logged in.
+[14:48:28.259776400] Doge connected!
+[14:48:34.564121600] Doge send message: hola
+[14:48:36.828452] Server shutdown initiated via console
+[14:48:36.829449200] Shutting down connection for: Doge
+[14:48:36.829449200] Shutting down connection for: Doge
+[14:49:25.920251100] Server started on port 12345
+[14:49:32.713833100] Doge logged in.
+[14:49:32.713833100] Doge connected!
+[14:49:57.832175400] Server started on port 12345
+[14:50:03.967956200] Doge logged in.
+[14:50:03.967956200] Doge connected!
+[14:50:11.594902400] Doge use commend /quit
+[14:50:11.594902400] Doge left the server!
+[14:50:18.417012200] Server shutdown initiated via console
+[14:50:52.103695100] Server started on port 12345
+[14:50:58.085896700] Doge logged in.
+[14:50:58.086894200] Doge connected!
+[14:51:01.354048800] Server shutdown initiated via console
+[14:51:01.355048100] Shutting down connection for: Doge
+[14:51:01.355048100] Shutting down connection for: Doge
+[14:52:09.763032400] Server started on port 12345
+[14:52:15.053803600] Doge logged in.
+[14:52:15.054801100] Doge connected!
+[14:52:17.434958200] Server shutdown initiated via console
+[14:52:17.434958200] Shutting down connection for: Doge
