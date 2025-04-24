@@ -1,120 +1,106 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 #include "dekoder_lib.h"
+#include <stdlib.h>
 #include <time.h>
+#include <stdbool.h>
 
 #define CODE_LENGTH 4
 #define COLOR_COUNT 6
 #define MAX_ATTEMPTS 12
 
-typedef struct GameState {
-    int attempt;
-    char feedbackHistory[MAX_ATTEMPTS+1][2];
-    int boardHistory[MAX_ATTEMPTS+1][CODE_LENGTH];
+typedef struct {
+    int code[CODE_LENGTH];
+    char feedback[2];
+} Attempt;
+
+struct GameState {
+    int attempt_count;
+    Attempt history[MAX_ATTEMPTS];
+    bool possible_colors[CODE_LENGTH][COLOR_COUNT];
+};
+
+GameState* new_game_state() {
+    GameState* state = malloc(sizeof(GameState));
+    if (!state) return NULL;
     
-} GameState;
-
-
-GameState *new_game_state() {
+    state->attempt_count = 0;
     srand(time(NULL));
-    GameState *state = malloc(sizeof(GameState));
-    state->attempt = 0;
-
+    
+    // Initialize all colors as possible in all positions
+    for (int i = 0; i < CODE_LENGTH; i++) {
+        for (int j = 0; j < COLOR_COUNT; j++) {
+            state->possible_colors[i][j] = true;
+        }
+    }
+    
     return state;
 }
 
-// Free the memory allocated for the GameState
-void destroy_game_state(GameState *state) {
-    if (state) {
-        free(state);
-    }
+void destroy_game_state(GameState* state) {
+    free(state);
 }
 
-
-void guess(GameState *state, int *guess,char* feedback) {\
-    int correctPlaces = 0;
-    int correctColors = 0;
-    int isGuessPlausible = 0;
-    int localGuess[CODE_LENGTH];
-
-    //write feedback from last attempt
-    if(state->attempt!=0)
-        for(int i=0;i<2;i++)
-            state->feedbackHistory[state->attempt-1][i]=feedback[i];
-    
-    //smart version
-    int counter=0;
-    while (!isGuessPlausible)
-    {
-    
-        counter++;
-        if(counter==10000){
-            printf("too long loop\n");
-            break;
-        }
-        for (int i = 0; i < CODE_LENGTH; i++)
-        {
-            localGuess[i] = rand() % COLOR_COUNT;
-        }
-        if (state->attempt == 0)
-        {
-            break;
-        }
-
-        for (int i = 0; i < state->attempt; i++)
-        {
-            for (int j = 0; j < CODE_LENGTH; j++)
-            {
-                if (state->boardHistory[i][j] == localGuess[j])
-                {
-                    ++correctPlaces;
-                }
-
+bool is_possible(const GameState* state, const int* guess) {
+    // Check against all previous attempts
+    for (int i = 0; i < state->attempt_count; i++) {
+        const Attempt* prev = &state->history[i];
+        int correct_pos = 0;
+        int correct_col = 0;
+        
+        // Count correct positions
+        for (int j = 0; j < CODE_LENGTH; j++) {
+            if (guess[j] == prev->code[j]) {
+                correct_pos++;
             }
-            if (correctPlaces != state->feedbackHistory[i-1][1])
-            {
-                --isGuessPlausible;
-            }
-            correctPlaces = 0;
-
-
-            for (int j = 0; j < CODE_LENGTH; j++)
-            {
-                for (int k = 0; k < CODE_LENGTH; k++)
-                {
-                    if (state->boardHistory[i][j] == localGuess[k])
-                    {
-                        ++correctColors;
-                        break;
-                    }
-                }
-            }
-            if (correctColors != state->feedbackHistory[i-1][0])
-            {
-                --isGuessPlausible;
-            }
-            correctColors = 0;
-
         }
         
-        if (isGuessPlausible == 0)
-        {
-            break;
+        // Count correct colors (wrong positions)
+        for (int c = 0; c < COLOR_COUNT; c++) {
+            int count_guess = 0;
+            int count_prev = 0;
+            
+            for (int j = 0; j < CODE_LENGTH; j++) {
+                if (guess[j] == c) count_guess++;
+                if (prev->code[j] == c) count_prev++;
+            }
+            
+            correct_col += (count_guess < count_prev) ? count_guess : count_prev;
         }
-        isGuessPlausible = 0;
+        correct_col -= correct_pos;
+        
+        // Check if this guess matches previous feedback
+        if (correct_pos != prev->feedback[0] || correct_col != prev->feedback[1]) {
+            return false;
+        }
     }
-
-
-
-    for(int i=0;i<CODE_LENGTH;i++){
-        guess[i] = localGuess[i];
-        state->boardHistory[state->attempt][i]=guess[i];
-    }
-    state->attempt++;
-
+    return true;
 }
 
-int getAttempts(GameState *state){
-    return state->attempt;
+void guess(GameState* state, int* guess, char* feedback) {
+    // Store previous feedback if available
+    if (state->attempt_count > 0) {
+        state->history[state->attempt_count-1].feedback[0] = feedback[0];
+        state->history[state->attempt_count-1].feedback[1] = feedback[1];
+    }
+
+    // Generate random guesses until we find a possible one
+    int attempts = 0;
+    do {
+        for (int i = 0; i < CODE_LENGTH; i++) {
+            guess[i] = rand() % COLOR_COUNT;
+        }
+        attempts++;
+        
+        // Prevent infinite loops
+        if (attempts > 1000) break;
+    } while (state->attempt_count > 0 && !is_possible(state, guess));
+
+    // Record this attempt
+    for (int i = 0; i < CODE_LENGTH; i++) {
+        state->history[state->attempt_count].code[i] = guess[i];
+    }
+    state->attempt_count++;
+}
+
+int getAttempts(GameState* state) {
+    return state->attempt_count;
 }
