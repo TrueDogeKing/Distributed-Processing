@@ -56,6 +56,17 @@ public class Server implements Runnable{
         consoleThread.start();
     }
 
+
+    // Sending message to all connections
+    public void broadcast(String message){
+        for(ConnectionHandler connection : connections){
+            if(connection != null){
+                connection.sendMessage(message);
+            }
+        }
+    }
+
+
     @Override
     public void run() {
         try {
@@ -188,10 +199,13 @@ public class Server implements Runnable{
         }
 
         private void shutdown(){
+
+            sendMessage("quit");
             try {
                 connections.remove(this);
                 in.close();
                 out.close();
+
                 if(!clientSocket.isClosed()){
                     log("Shutting down connection for: " + nickName);
                     clientSocket.close();
@@ -201,19 +215,14 @@ public class Server implements Runnable{
             }
         }
 
-        // Sending message to all connections
-        public void broadcast(String message){
-            for(ConnectionHandler connection : connections){
-                if(connection != null){
-                    connection.sendMessage(message);
-                }
-            }
-        }
+        
+
 
         // Sending message
         public void sendMessage(String message){
             out.println(message);
         }
+        
 
         // Changing nickName
         private void changeNickName(String message){

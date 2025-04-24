@@ -23,7 +23,7 @@ public class Client implements Runnable{
         
         try {
             // Connect to the server
-            clientSocket = new Socket("127.0.0.1", 12345);
+            clientSocket = new Socket("172.20.83.214", 12345);
             log("Connected to the server!");
             log("type '/help' see the available commands !");
 
@@ -39,7 +39,15 @@ public class Client implements Runnable{
             String serverMessages;
             while ((serverMessages = in.readLine()) != null && working) {
                 System.out.println(serverMessages);
+                if(Objects.equals(serverMessages, "quit")){
+                    out.println(serverMessages);
+                    in.close();
+                    out.close();
+                    shutdown();
+                    break;
+                }
             }
+            log("exiting");
             shutdown(); 
 
         } catch (IOException e) {
@@ -51,6 +59,7 @@ public class Client implements Runnable{
     public void shutdown(){
         try {
             working = false;
+
             in.close();
             out.close();
             log("disconnected from server");

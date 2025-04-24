@@ -101,32 +101,524 @@
 [17:49:57.909758700] Dos connected!
 [17:50:03.637161400] Dos use commend /quit
 [17:50:03.638138700] Dos left the server!
-[14:48:02.436736200] Server started on port 12345
-[14:48:10.437937200] Server shutdown initiated via console
-[14:48:20.335429500] Server started on port 12345
-[14:48:28.259776400] Doge logged in.
-[14:48:28.259776400] Doge connected!
-[14:48:34.564121600] Doge send message: hola
-[14:48:36.828452] Server shutdown initiated via console
-[14:48:36.829449200] Shutting down connection for: Doge
-[14:48:36.829449200] Shutting down connection for: Doge
-[14:49:25.920251100] Server started on port 12345
-[14:49:32.713833100] Doge logged in.
-[14:49:32.713833100] Doge connected!
-[14:49:57.832175400] Server started on port 12345
-[14:50:03.967956200] Doge logged in.
-[14:50:03.967956200] Doge connected!
-[14:50:11.594902400] Doge use commend /quit
-[14:50:11.594902400] Doge left the server!
-[14:50:18.417012200] Server shutdown initiated via console
-[14:50:52.103695100] Server started on port 12345
-[14:50:58.085896700] Doge logged in.
-[14:50:58.086894200] Doge connected!
-[14:51:01.354048800] Server shutdown initiated via console
-[14:51:01.355048100] Shutting down connection for: Doge
-[14:51:01.355048100] Shutting down connection for: Doge
-[14:52:09.763032400] Server started on port 12345
-[14:52:15.053803600] Doge logged in.
-[14:52:15.054801100] Doge connected!
-[14:52:17.434958200] Server shutdown initiated via console
-[14:52:17.434958200] Shutting down connection for: Doge
+[16:32:16.938503912] Server started on port 12345
+[16:32:37.645837287] Doge logged in.
+[16:32:37.646046505] Doge connected!
+[16:36:56.974006077] Doge use commend /list
+[16:43:12.276554652] Server started on port 12345
+[16:43:25.235497798] Kuba registered and joined.
+[16:43:25.235626355] Kuba connected!
+[16:43:30.322407096] Doge logged in.
+[16:43:30.322846395] Doge connected!
+[16:43:30.692750847] Kuba send message: siema cwele
+[16:43:33.783265634] Doge send message: Hola doga
+[16:43:38.048322733] hudy registered and joined.
+[16:43:38.048708744] hudy connected!
+[16:43:39.627395872] Kuba send message: it works
+[16:43:41.439062426] hudy send message: elo
+[16:43:46.399990305] Doge send message: hola
+[16:43:54.070839061] hudy send message: doge
+[16:44:00.550626095] hudy use commend /help
+[16:44:02.179467393] Kuba use commend /help
+[16:44:15.102724428] hudy sent private message to doge
+[16:44:20.420605845] Kuba sent private message to hudy
+[16:44:20.423530437] hudy received private message from Kuba
+[16:44:33.375295922] hudy send message: [B[A/msg Doge Doge
+[16:44:48.414707916] hudy use commend /help
+[16:45:05.591054089] hudy sent private message to Doge
+[16:45:05.591899196] Doge received private message from hudy
+[16:45:20.069184691] Kuba send message: [D[D
+[16:45:22.182569449] hudy use commend /help
+[16:45:25.036975532] Kuba send message: aaa
+[16:45:28.063104570] hudy send message: quit
+[16:45:32.511605302] hudy use commend /quit
+[16:45:32.512531719] hudy left the server!
+[16:45:46.607397490] Doge sent private message to hudy
+[16:45:46.609468192] Stored offline message for hudy from Doge
+[16:45:53.967612617] Doge sent private message to hudy
+[16:45:53.968598066] Stored offline message for hudy from Doge
+[16:46:16.305123703] hudy logged in.
+[16:46:16.305871616] Delivered offline messages to hudy
+[16:46:16.306106254] hudy connected!
+[16:48:29.591541908] Server shutdown initiated via console
+[16:48:29.592512227] Shutting down connection for: Kuba
+[16:48:29.592783329] Shutting down connection for: Kuba
+[16:48:35.847619418] Kuba send message: 
+[16:48:35.847560348] Shutting down connection for: Doge
+[16:48:35.847600144] Shutting down connection for: Doge
+[16:48:39.840436777] Doge send message: \
+[16:48:39.840513884] Shutting down connection for: hudy
+[16:48:39.840545622] Shutting down connection for: hudy
+[16:48:44.456396499] hudy send message: k
+[16:53:33.774134377] Server started on port 12345
+[16:53:45.334594003] Doge logged in.
+[16:53:45.334747597] Doge connected!
+[16:53:48.184760255] Server shutdown initiated via console
+[16:53:48.186731509] Shutting down connection for: Doge
+[16:53:48.186822250] Shutting down connection for: Doge
+[16:53:52.674311121] Doge send message: 
+[16:54:49.168369576] Server started on port 12345
+[16:54:57.705299661] Doge logged in.
+[16:54:57.705482114] Doge connected!
+[16:55:01.703721979] Doge send message: hola
+[16:55:04.113051619] Server shutdown initiated via console
+[16:55:04.114788755] Shutting down connection for: Doge
+[16:55:04.114993035] Shutting down connection for: Doge
+[16:55:08.377519845] Doge send message: 
+[16:55:55.718335372] Server started on port 12345
+[16:56:04.097893081] Doge logged in.
+[16:56:04.098098597] Doge connected!
+[16:56:06.633297687] Doge send message: hola
+[16:56:08.632916749] Server shutdown initiated via console
+[16:56:08.634793036] Shutting down connection for: Doge
+[16:56:08.634966135] Shutting down connection for: Doge
+[16:56:32.857869697] Doge send message: 
+[16:57:41.036030689] Server started on port 12345
+[16:57:54.713952007] Doge logged in.
+[16:57:54.714128919] Doge connected!
+[16:58:00.731413159] Doge send message: hola
+[16:58:04.825898571] Server shutdown initiated via console
+[16:58:04.827646493] Shutting down connection for: Doge
+[16:58:04.827894116] Shutting down connection for: Doge
+[16:58:11.313327182] Doge send message: 
+[16:59:47.454882982] Server started on port 12345
+[16:59:57.241704801] Doge logged in.
+[16:59:57.241888536] Doge connected!
+[17:00:03.236362843] Doge send message: hola doga
+[17:00:06.777868397] Server shutdown initiated via console
+[17:00:06.779682313] Shutting down connection for: Doge
+[17:00:06.779932847] Shutting down connection for: Doge
+[17:00:13.362323726] Doge send message: 
+[17:01:16.899105851] Server started on port 12345
+[17:01:28.304581905] Doge logged in.
+[17:01:28.305068722] Doge connected!
+[17:01:30.978775660] Doge send message: hoal doga
+[17:01:36.010112239] Server shutdown initiated via console
+[17:01:36.011925841] Shutting down connection for: Doge
+[17:01:36.012092671] Shutting down connection for: Doge
+[17:01:39.274756698] Doge send message: 
+[17:02:25.992337299] Server started on port 12345
+[17:02:36.522324272] Doge logged in.
+[17:02:36.522499061] Doge connected!
+[17:02:40.890130351] Server shutdown initiated via console
+[17:02:40.892030193] Shutting down connection for: Doge
+[17:02:40.892084333] Shutting down connection for: Doge
+[17:03:55.018865078] Doge send message: a
+[17:07:21.061398] Server started on port 12345
+[17:07:38.263075] a registered and joined.
+[17:07:38.263340] a connected!
+[17:07:43.132167] a send message: chuj
+[17:07:46.635127] Server shutdown initiated via console
+[17:07:46.637763] Shutting down connection for: a
+[17:07:46.637965] Shutting down connection for: a
+[17:07:51.778823] a send message: 
+[17:08:59.384711] Server started on port 12345
+[17:09:07.965237] a logged in.
+[17:09:07.965503] a connected!
+[17:09:12.771377] a use commend /quit
+[17:09:12.772748] a left the server!
+[17:10:45.731391] a logged in.
+[17:10:45.731535] a connected!
+[17:10:48.738932] Server shutdown initiated via console
+[17:10:48.741029] Shutting down connection for: a
+[17:10:48.741113] Shutting down connection for: a
+[17:10:51.101174] a send message: 
+[17:13:27.050158] Server started on port 12345
+[17:13:34.236381] a logged in.
+[17:13:34.236631] a connected!
+[17:13:35.039283] a send message: a
+[17:13:39.579695] Server shutdown initiated via console
+[17:13:39.582399] Shutting down connection for: a
+[17:13:39.582532] Shutting down connection for: a
+[17:13:43.883826] a send message: 
+[17:15:00.221099] Server started on port 12345
+[17:15:08.247432] a logged in.
+[17:15:08.247679] a connected!
+[17:15:12.603610] Server shutdown initiated via console
+[17:15:12.606279] Shutting down connection for: a
+[17:15:12.606433] Shutting down connection for: a
+[17:15:14.545357] a send message: 
+[17:16:02.613124] Server started on port 12345
+[17:16:07.692339] a logged in.
+[17:16:07.692698] a connected!
+[17:16:11.899711] Server shutdown initiated via console
+[17:16:11.902679] Shutting down connection for: a
+[17:16:11.902781] Shutting down connection for: a
+[17:16:13.713509] a send message: 
+[17:16:52.412833] Server started on port 12345
+[17:16:57.766537] a logged in.
+[17:16:57.766803] a connected!
+[17:16:58.712182] a send message: a
+[17:16:59.107993] a send message: a
+[17:17:01.099988] Server shutdown initiated via console
+[17:17:01.102370] Shutting down connection for: a
+[17:17:01.102804] Shutting down connection for: a
+[17:17:01.104725] a send message: quit
+[17:17:57.439279] Server started on port 12345
+[17:18:05.975475] a logged in.
+[17:18:05.975733] a connected!
+[17:18:09.660060] Server shutdown initiated via console
+[17:18:09.662624] Shutting down connection for: a
+[17:18:09.662718] Shutting down connection for: a
+[17:18:09.685208] a send message: quit
+[17:19:33.674695594] Server started on port 12345
+[17:20:53.995554291] s registered and joined.
+[17:20:53.995690537] s connected!
+[17:20:57.350867277] s send message: hola
+[17:20:59.125717961] Server shutdown initiated via console
+[17:20:59.127360531] Shutting down connection for: s
+[17:20:59.127735570] Shutting down connection for: s
+[17:20:59.128862582] s send message: quit
+[17:21:10.472918696] Server started on port 12345
+[17:21:19.619252483] a logged in.
+[17:21:19.619403798] a connected!
+[17:21:25.286741489] s logged in.
+[17:21:25.286935148] s connected!
+[17:21:28.303020711] a send message: 
+[17:21:29.408397219] Doge logged in.
+[17:21:29.408829354] Doge connected!
+[17:21:33.710902463] a send message: siema chujki
+[17:21:51.983186765] s sent private message to Doge
+[17:21:51.985487905] Doge received private message from s
+[17:21:56.116555799] Server shutdown initiated via console
+[17:21:56.118688311] Shutting down connection for: a
+[17:21:56.118804758] Shutting down connection for: a
+[17:21:56.120278453] Doge send message: quit
+[17:21:56.120720500] a send message: quit
+[17:21:56.120723470] s send message: quit
+[17:21:56.121532120] Shutting down connection for: s
+[17:21:56.121762628] Shutting down connection for: s
+[17:21:56.122621875] Shutting down connection for: Doge
+[17:21:56.122726584] Shutting down connection for: Doge
+[17:22:02.356510177] Server started on port 12345
+[17:22:13.849884256] Doge logged in.
+[17:22:13.850338728] Doge connected!
+[17:22:14.625911018] a logged in.
+[17:22:14.626355012] a connected!
+[17:22:19.253153770] Doge send message: hola doga
+[17:22:21.870988066] a send message: hola
+[17:22:22.145344565] a logged in.
+[17:22:22.145764171] a connected!
+[17:22:22.711723966] a send message: a
+[17:22:27.303017324] a use commend /quit
+[17:22:27.304103482] a left the server!
+[17:22:27.305520189] Doge send message: quit
+[17:22:27.305597498] a send message: quit
+[17:22:43.481716913] hudy logged in.
+[17:22:43.482135829] hudy connected!
+[17:23:08.831089173] hudy use commend /list
+[17:23:18.442009435] a logged in.
+[17:23:18.442406590] a connected!
+[17:23:27.913488477] a send message: 
+[17:23:28.313047436] a send message: 
+[17:23:28.729122198] a send message: a
+[17:23:29.352286456] a send message: a
+[17:23:30.705716772] a send message: a
+[17:23:30.873123419] a send message: a
+[17:23:31.016771932] a send message: a
+[17:23:31.168605275] a send message: a
+[17:23:31.303935908] a send message: a
+[17:23:31.473209877] a send message: a
+[17:23:32.031441698] Doge logged in.
+[17:23:32.031818662] Doge connected!
+[17:23:41.056175814] hudy send message: fs
+[17:23:44.454300959] hudy use commend /list
+[17:23:56.956770997] hudy use commend /list
+[17:24:02.149629182] Server shutdown initiated via console
+[17:24:02.150688339] Shutting down connection for: a
+[17:24:02.150868920] Shutting down connection for: a
+[17:24:02.151994754] Shutting down connection for: Doge
+[17:24:02.152118805] Shutting down connection for: Doge
+[17:24:02.152917522] Doge send message: quit
+[17:24:02.153113784] hudy send message: quit
+[17:24:02.154657022] a send message: quit
+[17:24:02.154824132] Shutting down connection for: hudy
+[17:24:02.155039896] Shutting down connection for: hudy
+[17:24:02.156168099] Shutting down connection for: a
+[17:24:02.156343469] Shutting down connection for: a
+[17:24:02.156966200] Shutting down connection for: Doge
+[17:24:02.157485811] Shutting down connection for: null
+[17:24:02.157559561] Shutting down connection for: Doge
+[17:24:02.158201733] Shutting down connection for: null
+[17:24:07.578285614] Server started on port 12345
+[17:24:20.979943483] Doge logged in.
+[17:24:20.980499529] Doge connected!
+[17:24:23.611884965] a logged in.
+[17:24:23.612305553] a connected!
+[17:24:25.886117507] Doge send message: Hola
+[17:24:40.545149517] hudy logged in.
+[17:24:40.545553870] hudy connected!
+[17:24:44.087937524] hudy use commend /list
+[17:24:51.925259285] Doge use commend /list
+[17:24:53.264660380] hudy send message: hola
+[17:24:57.379561509] kubaa registered and joined.
+[17:24:57.379717621] kubaa connected!
+[17:25:06.246621571] Doge send message: hola
+[17:25:09.776143080] hudy send message: hola
+[17:25:16.574943005] Doge sent private message to hudy
+[17:25:16.576459412] hudy received private message from Doge
+[17:25:31.582998280] Doge sent private message to ysh
+[17:25:40.194034173] kubaa use commend /list
+[17:25:41.656473164] hudy use commend /quit
+[17:25:41.657408208] hudy left the server!
+[17:25:41.658827171] Doge send message: quit
+[17:25:41.659203473] a send message: quit
+[17:25:41.660011175] kubaa send message: quit
+[17:26:09.342297120] Server shutdown initiated via console
+[17:26:09.343200857] Shutting down connection for: a
+[17:26:09.343384812] Shutting down connection for: a
+[17:26:09.345351641] Shutting down connection for: Doge
+[17:26:09.345428464] Shutting down connection for: Doge
+[17:26:09.346133554] Shutting down connection for: kubaa
+[17:26:09.346288522] Shutting down connection for: kubaa
+[17:26:42.655179437] Server started on port 12345
+[17:26:46.955271915] a logged in.
+[17:26:46.955461038] a connected!
+[17:26:55.218903572] a use commend /quit
+[17:26:55.219766504] a left the server!
+[17:27:06.615570957] a logged in.
+[17:27:06.616363300] a connected!
+[17:27:07.339009933] a logged in.
+[17:27:07.339432983] a connected!
+[17:27:23.771180533] a use commend /quit
+[17:27:23.771969922] a left the server!
+[17:27:23.781794910] a send message: quit
+[17:28:25.342216587] Server shutdown initiated via console
+[17:28:25.343294232] Shutting down connection for: a
+[17:28:25.343367421] Shutting down connection for: a
+[17:28:35.176077725] Server started on port 12345
+[17:28:54.741597355] Doge logged in.
+[17:28:54.741750917] Doge connected!
+[17:28:57.714344016] a logged in.
+[17:28:57.714770813] a connected!
+[17:29:02.447732665] Doge send message: quit
+[17:29:05.966827690] Doge send message: ad
+[17:29:07.967056085] Doge use commend /quit
+[17:29:07.968002405] Doge left the server!
+[17:29:10.023539969] a send message: a
+[17:29:10.623205982] a send message: a
+[17:29:11.166818287] a send message: s
+[17:29:16.726393023] Server shutdown initiated via console
+[17:29:16.727527840] Shutting down connection for: a
+[17:29:16.735708750] Shutting down connection for: null
+[17:29:33.904301716] Server started on port 12345
+[17:29:39.945336940] a logged in.
+[17:29:39.945503605] a connected!
+[17:29:41.441841267] a logged in.
+[17:29:41.442345089] a connected!
+[17:29:42.036197372] a send message: quit
+[17:29:47.651963470] s logged in.
+[17:29:47.652404347] s connected!
+[17:29:48.880233695] a send message: da
+[17:29:50.727572309] a use commend /quit
+[17:29:50.728529774] a left the server!
+[17:29:50.777541176] s use commend /list
+[17:29:53.901243013] a send message: a
+[17:29:54.884901832] a send message: a
+[17:29:55.604499986] a send message: a
+[17:29:55.649445156] s send message: g
+[17:29:56.377498196] s send message: g
+[17:29:56.866376240] s send message: g
+[17:29:57.394176127] s send message: gg
+[17:29:57.753965756] s send message: f
+[17:29:57.945352393] s send message: f
+[17:29:58.105892820] s send message: 
+[17:29:58.377708463] s send message: f
+[17:29:58.626082536] s send message: 
+[17:29:58.721695249] s send message: 
+[17:29:58.817683530] s send message: 
+[17:29:59.089661013] s send message: f
+[17:29:59.193497585] s send message: 
+[17:29:59.321804927] s send message: 
+[17:30:17.986354871] s sent private message to Doge
+[17:30:17.992225629] Stored offline message for Doge from s
+[17:30:26.185054840] Doge logged in.
+[17:30:26.185756533] Delivered offline messages to Doge
+[17:30:26.185999936] Doge connected!
+[17:30:32.170256617] s use commend /quit
+[17:30:32.171812561] s left the server!
+[17:30:34.928320219] Doge send message: a
+[17:30:35.326458679] Doge send message: a
+[17:30:35.479476881] Doge send message: 
+[17:30:35.630913315] Doge send message: a
+[17:30:59.582957027] Server shutdown initiated via console
+[17:30:59.584152289] Shutting down connection for: a
+[17:30:59.584272103] Shutting down connection for: a
+[17:30:59.584580084] Shutting down connection for: Doge
+[17:30:59.584706520] Shutting down connection for: Doge
+[17:31:01.647569094] b registered and joined.
+[17:31:01.647893011] b connected!
+[17:31:04.021981099] b send message: bb
+[17:31:19.965969819] Server started on port 12345
+[17:31:29.404079811] a logged in.
+[17:31:29.404348] a connected!
+[17:31:30.766357782] a send message: a
+[17:31:35.631207778] hudy logged in.
+[17:31:35.632131691] hudy connected!
+[17:32:11.464899741] Server started on port 12345
+[17:32:18.586991393] b logged in.
+[17:32:18.587140226] b connected!
+[17:32:29.653327134] hudy logged in.
+[17:32:29.653743923] hudy connected!
+[17:32:30.775719586] Server shutdown initiated via console
+[17:32:30.777779795] Shutting down connection for: b
+[17:32:30.778169475] Shutting down connection for: b
+[17:32:30.779774828] Shutting down connection for: hudy
+[17:32:30.779918454] Shutting down connection for: hudy
+[17:32:30.795247506] hudy send message: quit
+[17:32:30.795370646] b send message: quit
+[17:32:37.325254377] Server started on port 12345
+[17:32:44.659101469] b logged in.
+[17:32:44.659279821] b connected!
+[17:32:46.766686573] b send message: aa
+[17:32:50.317716279] hudy logged in.
+[17:32:50.318139543] hudy connected!
+[17:32:52.251448166] hudy use commend /quit
+[17:32:52.252383083] hudy left the server!
+[17:32:52.253610747] b send message: quit
+[17:34:38.899440877] Server started on port 12345
+[17:34:47.047894932] b logged in.
+[17:34:47.048120989] b connected!
+[17:34:48.601166983] b send message: aa
+[17:34:53.231126358] hudy logged in.
+[17:34:53.231553320] hudy connected!
+[17:34:54.008514803] Server shutdown initiated via console
+[17:34:54.010384362] Shutting down connection for: b
+[17:34:54.010621] Shutting down connection for: b
+[17:34:57.184606925] b send message: 
+[17:34:57.184967805] Shutting down connection for: hudy
+[17:34:57.185135987] Shutting down connection for: hudy
+[17:34:58.436098733] hudy send message: 
+[17:35:28.667638952] Server started on port 12345
+[17:35:33.269241905] b logged in.
+[17:35:33.269421193] b connected!
+[17:35:35.128508104] Server shutdown initiated via console
+[17:35:35.130494326] Shutting down connection for: b
+[17:35:35.130589584] Shutting down connection for: b
+[17:35:35.147431919] b send message: quit
+[17:35:43.279962731] Server started on port 12345
+[17:35:49.107834652] b logged in.
+[17:35:49.107992268] b connected!
+[17:35:51.257061054] b send message: aa
+[17:35:55.351694741] hudy logged in.
+[17:35:55.352219295] hudy connected!
+[17:35:56.400485237] Server shutdown initiated via console
+[17:35:56.402536464] Shutting down connection for: b
+[17:35:56.402811979] Shutting down connection for: b
+[17:35:56.404366563] b send message: quit
+[17:35:56.404478808] Shutting down connection for: hudy
+[17:35:56.404475420] Shutting down connection for: hudy
+[17:35:56.405570753] hudy send message: quit
+[17:36:00.344943110] Server started on port 12345
+[17:36:04.900523544] b logged in.
+[17:36:04.900738205] b connected!
+[17:36:18.319379288] hudy logged in.
+[17:36:18.319885300] hudy connected!
+[17:36:22.973684447] hudy use commend /quit
+[17:36:22.974563139] hudy left the server!
+[17:36:25.506792106] b send message: a
+[17:36:39.955642614] b sent private message to Doge
+[17:36:51.226558075] Doge logged in.
+[17:36:51.226971016] Doge connected!
+[17:36:55.295657871] hudy logged in.
+[17:36:55.296103683] hudy connected!
+[17:36:56.733561904] hudy send message: a
+[17:37:30.510365895] hudy send message: hikda
+[17:38:19.708853989] a logged in.
+[17:38:19.709280511] a connected!
+[17:38:25.515193327] Doge send message: 
+[17:38:26.507968756] a sent private message to hudy
+[17:38:26.510046847] hudy received private message from a
+[17:38:26.922291532] Doge send message: 
+[17:38:27.274377447] Doge send message: 
+[17:38:27.450245306] Doge send message: 
+[17:38:27.633987678] Doge send message: 
+[17:38:28.050067374] Doge send message: a
+[17:38:28.425749607] Doge send message: a
+[17:38:28.705855459] Doge send message: 
+[17:38:28.945821236] Doge send message: a
+[17:38:30.420004800] a send message: a
+[17:38:38.798695969] hudy use commend /quit
+[17:38:38.799726508] hudy left the server!
+[17:38:40.155577487] a send message: 
+[17:38:42.850380868] Doge logged in.
+[17:38:42.850776275] Doge connected!
+[17:38:45.323578157] a sent private message to hudy
+[17:38:45.326829756] Stored offline message for hudy from a
+[17:38:49.578157773] Doge sent private message to a
+[17:38:49.578869236] a received private message from Doge
+[17:38:56.794041276] Doge use commend /quit
+[17:38:56.795028738] Doge left the server!
+[17:38:58.812639489] a sent private message to Doge
+[17:38:58.813548025] Doge received private message from a
+[17:39:01.743425785] s logged in.
+[17:39:01.743778867] s connected!
+[17:39:05.686787536] s use commend /list
+[17:39:11.042629312] Doge logged in.
+[17:39:11.042999072] Doge connected!
+[17:39:14.585398381] Doge use commend /quit
+[17:39:14.586317413] Doge left the server!
+[17:39:19.750564744] s use commend /list
+[17:39:20.340264321] a sent private message to Doge
+[17:39:20.341009281] Doge received private message from a
+[17:39:26.356558688] a use commend /list
+[17:39:36.692226103] a use commend /list
+[17:39:43.724537382] a sent private message to hudy
+[17:39:43.725448678] Stored offline message for hudy from a
+[17:39:46.285897552] s use commend /quit
+[17:39:46.286153890] s left the server!
+[17:39:50.900463001] a use commend /list
+[17:39:56.424155814] hudy logged in.
+[17:39:56.424877990] Delivered offline messages to hudy
+[17:39:56.425076552] hudy connected!
+[17:40:01.882119087] Server shutdown initiated via console
+[17:40:01.883370002] Shutting down connection for: b
+[17:40:01.883562359] Shutting down connection for: b
+[17:40:01.891716706] Shutting down connection for: Doge
+[17:40:01.891732658] Shutting down connection for: Doge
+[17:40:01.892210248] Shutting down connection for: a
+[17:40:01.892239502] Shutting down connection for: a
+[17:40:01.893498779] a send message: quit
+[17:40:01.893518393] Shutting down connection for: hudy
+[17:40:01.893541127] Shutting down connection for: hudy
+[17:40:01.894498474] hudy send message: quit
+[17:40:14.610875243] Server started on port 12345
+[17:40:21.517694652] b logged in.
+[17:40:21.517841773] b connected!
+[17:40:23.825625887] hudy logged in.
+[17:40:23.826050071] hudy connected!
+[17:40:24.995413038] b send message: test
+[17:40:28.743160941] hudy send message: test2
+[17:40:30.775531414] a logged in.
+[17:40:30.776403810] a connected!
+[17:40:32.700447139] Doge logged in.
+[17:40:32.700889239] Doge connected!
+[17:40:34.961922698] Doge use commend /list
+[17:40:36.365906207] a use commend /list
+[17:40:39.823318887] hudy use commend /list
+[17:40:52.674738805] Doge send message: doge
+[17:40:54.674172460] Doge use commend /quit
+[17:40:54.675109135] Doge left the server!
+[17:40:59.016603542] hudy sent private message to Doge
+[17:40:59.023043766] Stored offline message for Doge from hudy
+[17:41:24.059818788] Doge logged in.
+[17:41:24.060577127] Delivered offline messages to Doge
+[17:41:24.060815167] Doge connected!
+[17:41:45.746562470] Doge use commend /quit
+[17:41:45.747384677] Doge left the server!
+[17:42:03.142672113] b sent private message to Doge
+[17:42:03.143628133] Stored offline message for Doge from b
+[17:42:08.663190709] a sent private message to Doge
+[17:42:08.664087695] Stored offline message for Doge from a
+[17:42:17.624877041] Doge logged in.
+[17:42:17.625195013] Delivered offline messages to Doge
+[17:42:17.625320082] Doge connected!
+[17:42:22.882572523] Doge use commend /quit
+[17:42:22.883467527] Doge left the server!
+[17:42:56.938292274] Server shutdown initiated via console
+[17:42:56.939547066] Shutting down connection for: hudy
+[17:42:56.940305443] Shutting down connection for: b
+[17:42:56.941155640] Shutting down connection for: b
+[17:42:56.941528753] Shutting down connection for: a
+[17:42:56.941625338] hudy send message: quit
+[17:42:56.941566484] Shutting down connection for: a
