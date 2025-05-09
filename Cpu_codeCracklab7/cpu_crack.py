@@ -3,7 +3,7 @@ import hashlib
 import logging
 import sys
 import time
-from concurrent.futures import ThreadPoolExecutor
+from concurrent.futures import ProcessPoolExecutor
 
 # Konfiguracja logowania
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
@@ -13,7 +13,6 @@ CHARSET = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&
 def generate_passwords(length, start_index, step):
     charset_list = list(CHARSET)
     charset_len = len(charset_list)
-
     total_combinations = charset_len ** length
 
     for idx in range(start_index, total_combinations, step):
@@ -25,17 +24,12 @@ def generate_passwords(length, start_index, step):
         yield password
 
 def crack_worker(hash_to_crack, length, start_index, step):
-    """
-    Worker funkcja do łamania hasła.
-    """
-    logging.info(f"Thread {start_index} started working.")  # --- LOG  THREAD START  ---
-
+    logging.info(f"Process {start_index} started.")
     for password in generate_passwords(length, start_index, step):
         if hashlib.sha256(password.encode()).hexdigest() == hash_to_crack:
-            logging.info(f"Thread {start_index} found password: {password}")  # --- LOG PASSWORD FOUND ---
+            logging.info(f"Password found by process {start_index}: {password}")
             return password
-
-    logging.info(f"Thread {start_index} finnished with no success.")  # --- LOG END OF THREAD  ---
+    logging.info(f"Process {start_index} finished with no result.")
     return None
 
 async def main():
@@ -45,12 +39,11 @@ async def main():
 
     hash_to_crack = sys.argv[1]
     length = int(sys.argv[2])
-
     start_time = time.time()
 
     loop = asyncio.get_running_loop()
 
-    with ThreadPoolExecutor(max_workers=8) as executor:
+    with ProcessPoolExecutor(max_workers=8) as executor:
         tasks = [
             loop.run_in_executor(executor, crack_worker, hash_to_crack, length, i, 8)
             for i in range(8)
@@ -65,7 +58,6 @@ async def main():
                 print(f"Password forced : {password}")
                 print(f"Time of forcing: {end_time - start_time:.2f} s")
 
-                # Anuluj pozostałe taski
                 for p in pending:
                     p.cancel()
                 return
