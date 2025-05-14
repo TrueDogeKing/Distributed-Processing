@@ -1,97 +1,73 @@
 import argparse
-import asyncio
 import logging
-import os
 import time
+from multiprocessing import Process, shared_memory, cpu_count
 from PIL import Image
+import numpy as np
 from pathlib import Path
-from concurrent.futures import ProcessPoolExecutor
-from multiprocessing import cpu_count
 
-# Configure logging
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 
-def process_segment(segment_data, segment_index):
-    """Processes an image segment – inverts colors to negative."""
-    segment = segment_data.copy()
-    width, height = segment.size
-    logging.info(f"[Process {segment_index}] Started processing segment ({width}x{height})")
-    
-    for y in range(height):
-        for x in range(width):
-            r, g, b = segment.getpixel((x, y))
-            segment.putpixel((x, y), (255 - r, 255 - g, 255 - b))
+def process_segment(shm_name, shape, dtype, start_row, end_row, index):
+    logging.info(f"[Process {index}] Working on rows {start_row} to {end_row}")
+    shm = shared_memory.SharedMemory(name=shm_name)
+    array = np.ndarray(shape, dtype=dtype, buffer=shm.buf)
+    array[start_row:end_row] = 255 - array[start_row:end_row]
+    shm.close()
+    logging.info(f"[Process {index}] Finished")
 
-    logging.info(f"[Process {segment_index}] Finished processing segment")
-    return segment_index, segment
-
-def split_image(image, num_parts):
-    """Splits an image into horizontal segments."""
-    width, height = image.size
-    segment_height = height // num_parts
-    segments = []
-
-    for i in range(num_parts):
-        top = i * segment_height
-        bottom = (i + 1) * segment_height if i != num_parts - 1 else height
-        box = (0, top, width, bottom)
-        segment = image.crop(box)
-        segments.append(segment)
-
-    return segments
-
-def combine_segments(segments):
-    """Combines segments into a single image."""
-    total_height = sum(seg.size[1] for _, seg in segments)
-    width = segments[0][1].size[0]
-    final_image = Image.new('RGB', (width, total_height))
-
-    y_offset = 0
-    for _, segment in sorted(segments):
-        final_image.paste(segment, (0, y_offset))
-        y_offset += segment.size[1]
-
-    return final_image
-
-async def main_async(image_path, num_processes):
+def main(image_path: Path, num_processes: int):
+    logging.info("[MAIN] Opening image...")
     image = Image.open(image_path).convert('RGB')
-    width, height = image.size
-    logging.info(f"[MAIN] Loaded image: {width}x{height}")
+    array = np.array(image)
+    shape = array.shape
+    dtype = array.dtype
 
+    shm = shared_memory.SharedMemory(create=True, size=array.nbytes)
+    shared_array = np.ndarray(shape, dtype=dtype, buffer=shm.buf)
+    np.copyto(shared_array, array)
+
+    height = shape[0]
+    step = height // num_processes
+    processes = []
+
+    logging.info("[MAIN] Starting processing...")
     start_time = time.time()
-    segments = split_image(image, num_processes)
 
-    loop = asyncio.get_running_loop()
-    with ProcessPoolExecutor(max_workers=num_processes) as executor:
-        tasks = [
-            loop.run_in_executor(executor, process_segment, segment, i)
-            for i, segment in enumerate(segments)
-        ]
-        results = await asyncio.gather(*tasks)
+    for i in range(num_processes):
+        start = i * step
+        end = (i + 1) * step if i != num_processes - 1 else height
+        p = Process(target=process_segment, args=(shm.name, shape, dtype, start, end, i))
+        p.start()
+        processes.append(p)
 
-    final_image = combine_segments(results)
-    elapsed_time = time.time() - start_time
-    logging.info(f"[MAIN] Finished processing in {elapsed_time:.2f} seconds.")
+    for p in processes:
+        p.join()
 
-    output_path = image_path.parent / ("negative_" + image_path.name)
-    final_image.save(output_path)
-    logging.info(f"[MAIN] Saved output to file: {output_path}")
+    duration = time.time() - start_time
+    logging.info(f"[MAIN] Finished processing in {duration:.2f} seconds.")
 
-def parse_and_run():
-    parser = argparse.ArgumentParser(description="Convert image to negative using asyncio and ProcessPoolExecutor")
-    parser.add_argument("image_filename", help="Name of the image file located in the same folder as this script")
+    result_image = Image.fromarray(shared_array)
+    output_path = image_path.parent / f"negative_{image_path.name}"
+    result_image.save(output_path)
+    logging.info(f"[MAIN] Saved output to {output_path}")
+
+    shm.close()
+    shm.unlink()
+
+def parse_args():
+    parser = argparse.ArgumentParser(description="In-place image negative using shared memory and multiprocessing.")
+    parser.add_argument("image_filename", help="Input image filename (must be in the same directory as script).")
     parser.add_argument("-p", "--processes", type=int, default=cpu_count(),
-                        help="Number of processes to use (default: number of CPU cores)")
-    args = parser.parse_args()
+                        help="Number of processes to use (default: number of CPU cores).")
+    return parser.parse_args()
 
+if __name__ == "__main__":
+    args = parse_args()
     script_dir = Path(__file__).resolve().parent
     image_path = script_dir / args.image_filename
 
     if not image_path.exists():
-        logging.error(f"File does not exist: {image_path}")
-        return
-
-    asyncio.run(main_async(image_path, args.processes))
-
-if __name__ == "__main__":
-    parse_and_run()
+        logging.error(f"File not found: {image_path}")
+    else:
+        main(image_path, args.processes)
