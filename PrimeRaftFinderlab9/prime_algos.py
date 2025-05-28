@@ -60,3 +60,28 @@ def find_prime_miller_rabin(start, k=5):
         if is_probable_prime(start):
             return start
         start += 1
+
+
+def find_prime_eratosthenes(start, limit=10000):
+    """
+    Znajduje pierwszą liczbę pierwszą >= start,
+    korzystając z sita Eratostenesa aż do limitu.
+    """
+    if start < 2:
+        start = 2
+    sieve = [True] * (limit + 1)
+    sieve[0] = sieve[1] = False
+
+    for i in range(2, int(limit**0.5) + 1):
+        if sieve[i]:
+            for j in range(i*i, limit + 1, i):
+                sieve[j] = False
+
+    for num in range(start, limit + 1):
+        if sieve[num]:
+            return num
+    
+    # Jeśli nic nie znaleźliśmy w limicie, zwiększamy limit lub zwracamy None
+    # Możesz dostosować tę część do swoich potrzeb
+    return None
+

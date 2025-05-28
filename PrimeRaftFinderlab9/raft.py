@@ -1,10 +1,9 @@
 import threading
-import time
 from pathlib import Path
 from datetime import datetime
 
 class RaftLogic:
-    def __init__(self, node_id, all_ports):
+    def __init__(self, node_id, all_ports, proposal_queue=None):
         self.node_id = node_id
         self.all_ports = all_ports
         self.state = 'Leader' if node_id == 0 else 'Follower'
@@ -15,47 +14,61 @@ class RaftLogic:
         self.known_primes = set()
         self.highest_prime = 0
         self.log_file = "primes.txt"
-        self.followers = {}  # Mock registry of other nodes for simulation
-        self.pending_votes = {}  # Track ongoing vote processes
+        self.followers = {}  # follower_id -> Queue for voting requests
+        self.proposal_queue = proposal_queue  # For leader to receive messages (vote responses, proposals)
 
         if self.state == 'Leader':
-            Path(self.log_file).write_text("")
+            Path(self.log_file).write_text("")  # clear log file at start
 
-    def register_follower(self, follower_node):
-        if self.state == 'Leader':
-            self.followers[follower_node.node_id] = follower_node
+    def register_follower(self, follower_id, response_queue):
+        with self.lock:
+            self.followers[follower_id] = response_queue
+            print(f"[Leader {self.node_id}] Registered follower {follower_id}")
+            print(f"[Leader {self.node_id}] Current followers: {list(self.followers.keys())}")
 
     def propose_value(self, value, duration, proposer_id):
         with self.lock:
             if self.state != 'Leader':
-                print(f"[Node {self.node_id}] Forwarding prime {value} to leader {self.leader_id}")
+                print(f"[Node {self.node_id}] Not leader, ignoring propose_value")
                 return False
 
-            
-            # Leader broadcasts the proposed value to followers for voting
             print(f"[Leader {self.node_id}] Broadcasting prime {value} for voting")
-            print(f"[Leader {self.node_id}] Registered followers: {list(self.followers.keys())}")
+            votes = 1  # leader votes yes
+            total = 1
 
-            votes = 1  # Leader votes yes
-            total = 1  # Including self
-            for follower in self.followers.values():
+            # Send vote requests to all followers
+            for follower_id, follower_queue in self.followers.items():
                 total += 1
-                print(f"[Leader {self.node_id}] Asking follower {follower.node_id} to vote on prime {value}")
-                vote = follower.receive_candidate(value)
-                print(f"[Leader {self.node_id}] Follower {follower.node_id} voted {'YES' if vote else 'NO'} (votes so far: {votes}/{total})")
-                if vote:
-                    votes += 1
+                follower_queue.put(('vote_request', value))
+                print(f"[Leader {self.node_id}] Sent vote_request to follower {follower_id}")
 
+            votes_received = 0
+            votes_yes = 1
 
-            if votes > total // 2:
+            # Wait for votes from followers
+            while votes_received < (total - 1):
+                try:
+                    msg = self.proposal_queue.get(timeout=5)
+                except:
+                    print(f"[Leader {self.node_id}] Timeout waiting for votes")
+                    break
+
+                if msg[0] == 'vote_response':
+                    _, follower_id, vote = msg
+                    if follower_id in self.followers:
+                        votes_received += 1
+                        if vote:
+                            votes_yes += 1
+                        print(f"[Leader {self.node_id}] Received vote from follower {follower_id}: {'YES' if vote else 'NO'}")
+
+            if votes_yes > total // 2:
                 self._commit_prime(value, duration, proposer_id)
                 return True
             else:
-                print(f"[Leader {self.node_id}] Prime {value} rejected (votes: {votes}/{total})")
+                print(f"[Leader {self.node_id}] Prime {value} rejected (votes: {votes_yes}/{total})")
                 return False
 
     def receive_candidate(self, value):
-        """Follower checks if it considers the value a new biggest prime"""
         with self.lock:
             if value > self.highest_prime:
                 print(f"[Follower {self.node_id}] Accepting new candidate prime {value}")
@@ -64,7 +77,6 @@ class RaftLogic:
             return False
 
     def _commit_prime(self, value, duration, proposer_id):
-        """Commits the prime to the log after consensus"""
         entry = {
             'value': value,
             'proposer': proposer_id,
@@ -76,29 +88,13 @@ class RaftLogic:
         self.known_primes.add(value)
         self._write_to_log(entry, proposer_id, self.node_id)
 
-        print(f"[Leader {self.node_id}] ✅ Committed prime {value} "
-            f"(proposed by Node {proposer_id}) after majority agreement")
-
-    def _write_to_log(self, entry, proposer_id, leader_id):
-        """Atomic write to output file, with proposer info clearly noted"""
-        with open(self.log_file, "a") as f:
-            f.write(
-                f"# Proposed by Node {proposer_id}\n"
-                f"Prime: {entry['value']} | "
-                f"Committed by: Leader {leader_id} | "
-                f"Time: {entry['duration']:.8f}s | "
-                f"Timestamp: {entry['timestamp']}\n\n"
-            )
-
+        print(f"[Leader {self.node_id}] ✅ Committed prime {value} (proposed by Node {proposer_id}) after majority agreement")
 
     def _write_to_log(self, entry, proposer_id, leader_id):
         with open(self.log_file, "a") as f:
             f.write(
-                f"Prime: {entry['value']} | "
-                f"Proposed by: Node {proposer_id} | "
-                f"Committed by: Leader {leader_id} | "
-                f"Time: {entry['duration']:.8f}s | "
-                f"Timestamp: {entry['timestamp']}\n"
+                f"Prime: {entry['value']} | Proposed by: Node {proposer_id} | Committed by: Leader {leader_id} | "
+                f"Time: {entry['duration']:.8f}s | Timestamp: {entry['timestamp']}\n"
             )
 
     def shutdown(self):
