@@ -8,13 +8,14 @@ from prime_algos import (
 )
 
 class RaftNode:
-    def __init__(self, node_id, all_ports, algorithm="trial"):
+    def __init__(self, node_id, all_ports, algorithm="trial", proposal_queue=None):
         self.node_id = node_id
         self.all_ports = all_ports
         self.algorithm = algorithm
         self.max_prime = 2
-        self.raft = RaftLogic(node_id, all_ports) 
+        self.raft = RaftLogic(node_id, all_ports)
         self.shutdown_flag = False
+        self.proposal_queue = proposal_queue
 
     def choose_algorithm(self, start):
         if self.algorithm == "trial":
@@ -27,18 +28,32 @@ class RaftNode:
             raise ValueError("Unknown algorithm")
 
     def run(self):
-        current = 3
-        while current < 10000 and not self.shutdown_flag:
-            start_time = time.time()
-            prime = self.choose_algorithm(current)
-            duration = time.time() - start_time
-            
-            if prime > self.max_prime:
-                self.max_prime = prime
-                self.raft.propose_value(prime, duration, self.node_id)
-            
-            current = prime + 1
-        
-        # Shutdown when done
+        if self.raft.state == 'Follower':
+            current = 3
+            while current < 100 and not self.shutdown_flag:
+                start_time = time.time()
+                prime = self.choose_algorithm(current)
+                duration = time.time() - start_time
+
+                if prime > self.max_prime:
+                    self.max_prime = prime
+                    if self.proposal_queue:
+                        print(f"[Node {self.node_id}] Forwarding prime {prime} to leader")
+                        self.proposal_queue.put((prime, duration, self.node_id))
+
+                current = prime + 1
+
+            print(f"Node {self.node_id} completed prime search")
+
+        # Leader listens to incoming proposals
+        if self.raft.state == 'Leader':
+            print(f"[Leader {self.node_id}] Listening for proposals from followers...")
+            while True:
+                try:
+                    prime, duration, proposer_id = self.proposal_queue.get(timeout=2)
+                    self.raft.propose_value(prime, duration, proposer_id)
+                except:
+                    print(f"[Leader {self.node_id}] No more proposals. Shutting down.")
+                    break
+
         self.raft.shutdown()
-        print(f"Node {self.node_id} completed prime search")
